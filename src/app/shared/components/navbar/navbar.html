@@ -1,0 +1,39 @@
+<div class="d-md-none p-2 border-bottom bg-light w-100">
+  <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+    ☰ Menu
+  </button>
+</div>
+
+<div class="offcanvas-md offcanvas-start bg-light vh-100 border-end" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel" style="width: 280px;">
+
+  <div class="offcanvas-header d-md-none border-bottom">
+    <h5 class="offcanvas-title" id="sidebarMenuLabel">Invoice Assessment</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body d-flex flex-column flex-shrink-0 p-3 h-100">
+
+    <a href="/" class="d-none d-md-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <span class="fs-4">Invoice Assessment</span>
+    </a>
+
+    <hr class="d-none d-md-block">
+
+    <ul class="nav nav-pills flex-column mb-auto w-100">
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/invoice-list']">
+          All Invoices
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/create-invoice']">
+          Create Invoice
+        </a>
+      </li>
+    </ul>
+
+
+
+  </div>
+</div>

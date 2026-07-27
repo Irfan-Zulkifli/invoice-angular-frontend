@@ -1,0 +1,53 @@
+<div class="container mt-4">
+
+  <!-- Only show if the invoice has loaded -->
+  @if (invoice(); as inv) {
+
+    <!-- General Details Card -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-white">
+        <h5 class="mb-0 fw-bold">Invoice Details</h5>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6"><strong>Customer Name:</strong> {{ inv.customer_name }}</div>
+          <div class="col-md-6"><strong>Invoice Number:</strong> {{ inv.number }}</div>
+          <div class="col-md-6"><strong>Date:</strong> {{ inv.date }}</div>
+          <div class="col-md-6"><strong>Reference:</strong> {{ inv.reference }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Items Table Card -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-white">
+        <h5 class="mb-0 fw-bold">Invoice Items</h5>
+      </div>
+      <div class="card-body p-0">
+        <table class="table mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Product Name</th>
+              <th>Unit Price</th>
+              <th>Quantity</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (line of inv.invoice_items; track line.id || $index) {
+              <tr>
+                <td>{{ line.product_name }}</td>
+                <td>RM {{ line.unit_price }}</td>
+                <td>{{ line.quantity }}</td>
+                <td>RM {{ line.total_amount }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <a href="/invoice-list" class="btn btn-primary">Back to List</a>
+  }
+
+</div>

@@ -1,0 +1,81 @@
+<div class="card shadow-sm border-0">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          <th scope="col" class="ps-4 text-secondary fw-semibold">ID</th>
+          <th scope="col" class="text-secondary fw-semibold">Invoice Number</th>
+          <th scope="col" class="text-secondary fw-semibold">Date</th>
+          <th scope="col" class="text-secondary fw-semibold">Reference</th>
+          <th scope="col" class="text-secondary fw-semibold">Customer</th>
+          <th scope="col" class="text-end pe-4 text-secondary fw-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="border-top-0">
+        <!-- Loop through the data array inside the paginated response signal -->
+        @for (invoice of paginatedInvoices()?.data; track invoice.id) {
+          <tr>
+            <th scope="row" class="ps-4 text-muted fw-normal">{{ invoice.id }}</th>
+            <td class="fw-medium">{{ invoice.number }}</td>
+            <td>{{ invoice.date }}</td>
+
+            <td>
+              @if (invoice.reference) {
+                <span class="text-body">{{ invoice.reference }}</span>
+              } @else {
+                <span class="text-muted fst-italic">-</span>
+              }
+            </td>
+
+            <td>{{ invoice.customer_name }}</td>
+
+            <td class="text-end pe-4">
+              <div class="d-flex justify-content-end gap-2">
+                <a [routerLink]="['/view-invoice', invoice.id]" class="btn btn-sm btn-outline-success px-3">View</a>
+                <a [routerLink]="['/edit-invoice', invoice.id]" class="btn btn-sm btn-outline-primary px-3">Edit</a>
+                <button class="btn btn-sm btn-outline-danger px-3" (click)="deleteInvoice(invoice.id ?? 0)">Delete</button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="text-center py-5">
+              <div class="text-muted d-flex flex-column align-items-center">
+                <span class="fs-5 fw-medium mb-1">No invoices found</span>
+                <small>When you create invoices, they will appear here.</small>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination UI (Logic to be implemented later!) -->
+  @if (paginatedInvoices(); as pageData) {
+    <div class="card-footer bg-white border-top py-3 d-flex flex-column flex-md-row justify-content-between align-items-center">
+      
+      <!-- Meta Information -->
+      <span class="text-muted small mb-3 mb-md-0">
+        Showing <strong>{{ pageData.from || 0 }}</strong> to <strong>{{ pageData.to || 0 }}</strong> of <strong>{{ pageData.total }}</strong> results
+      </span>
+      
+      <!-- The Buttons -->
+      <nav aria-label="Invoice pagination">
+        <ul class="pagination pagination-sm mb-0">
+          
+          <!-- Loop through Laravel's automatic links array -->
+          @for (link of pageData.links; track $index) {
+            <li class="page-item" [class.active]="link.active" [class.disabled]="!link.url">
+              <!-- We use innerHTML because Laravel sends arrows like &laquo; and &raquo; -->
+              <button class="page-link" [innerHTML]="link.label" (click)="changePage(link.url)"></button>
+            </li>
+          }
+          
+        </ul>
+      </nav>
+
+    </div>
+  }
+
+</div>
