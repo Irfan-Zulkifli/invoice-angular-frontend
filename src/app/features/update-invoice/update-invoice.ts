@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './update-invoice.html',
   styleUrl: './update-invoice.css',
 })
-export class UpdateInvoice implements OnInit{
+export class UpdateInvoice implements OnInit {
   masterService = inject(MasterService);
   invoiceService = inject(InvoiceService);
   fb = inject(FormBuilder);
@@ -40,7 +40,7 @@ export class UpdateInvoice implements OnInit{
     })
     this.masterService.pageTitle.set("Edit Invoice");
     this.masterService.breadcrumbs.set([
-      { label: 'All Invoices', url: '/invoice-list'},
+      { label: 'All Invoices', url: '/invoice-list' },
       { label: "Edit Invoice", url: '#' }
     ]);
   }
@@ -97,8 +97,20 @@ export class UpdateInvoice implements OnInit{
         this.router.navigate(['/invoice-list'])
       },
       error: (err) => {
-        console.error("Error saving invoice", err.error);
-        alert("Failed to save invoice.");
+        if (err.status === 422) {
+
+          const validationErrors = err.error.errors;
+
+          if (validationErrors.number) {
+            const errorMessage = validationErrors.number[0];
+
+            console.error(errorMessage);
+
+            alert(errorMessage);
+          }
+        } else {
+          alert("Something went wrong!");
+        }
       }
     })
   }
