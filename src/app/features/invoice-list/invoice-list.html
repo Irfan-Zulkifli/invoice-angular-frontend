@@ -51,27 +51,22 @@
     </table>
   </div>
 
-  <!-- Pagination UI (Logic to be implemented later!) -->
   @if (paginatedInvoices(); as pageData) {
     <div class="card-footer bg-white border-top py-3 d-flex flex-column flex-md-row justify-content-between align-items-center">
-      
-      <!-- Meta Information -->
+
       <span class="text-muted small mb-3 mb-md-0">
         Showing <strong>{{ pageData.from || 0 }}</strong> to <strong>{{ pageData.to || 0 }}</strong> of <strong>{{ pageData.total }}</strong> results
       </span>
-      
-      <!-- The Buttons -->
+
       <nav aria-label="Invoice pagination">
         <ul class="pagination pagination-sm mb-0">
-          
-          <!-- Loop through Laravel's automatic links array -->
+
           @for (link of pageData.links; track $index) {
             <li class="page-item" [class.active]="link.active" [class.disabled]="!link.url">
-              <!-- We use innerHTML because Laravel sends arrows like &laquo; and &raquo; -->
               <button class="page-link" [innerHTML]="link.label" (click)="changePage(link.url)"></button>
             </li>
           }
-          
+
         </ul>
       </nav>
 

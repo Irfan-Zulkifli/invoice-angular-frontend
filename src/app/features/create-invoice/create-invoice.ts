@@ -83,9 +83,20 @@ export class CreateInvoice implements OnInit {
         this.router.navigate(['/invoice-list']);
       },
       error: (err) => {
-        console.log(err.message);
-        console.error("Error saving invoice", err.message.errors);
-        alert("Failed to save invoice.");
+        if (err.status === 422) {
+
+          const validationErrors = err.error.errors;
+
+          if (validationErrors.number) {
+            const errorMessage = validationErrors.number[0];
+
+            console.error(errorMessage);
+
+            alert(errorMessage);
+          }
+        } else {
+          alert("Something went wrong!");
+        }
       }
     });
   }

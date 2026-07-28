@@ -65,7 +65,8 @@ export class InvoiceList implements OnInit {
 
   deleteInvoice(id: number = 0) {
 
-    let isConfirm: boolean = confirm('test');
+    
+    let isConfirm: boolean = confirm('Are you sure to delete this invoice?');
 
     if (isConfirm) {
       this.invoiceService.delete(id).subscribe({
