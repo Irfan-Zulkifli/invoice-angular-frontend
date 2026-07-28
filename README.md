@@ -1,6 +1,6 @@
 # Frontend Application
 
-A modern Angular-based frontend application designed to work with a Laravel backend API for invoice management and data processing.
+A Angular-based frontend application designed to work with a Laravel backend API for invoice management and data processing.
 
 ## 🛠️ Prerequisites
 
@@ -34,8 +34,6 @@ export const environment = {
   baseUrl: 'http://localhost:8000/api'
 };
 ```
-
-**Note:** Please ensure CORS is properly configured on the Laravel backend to accept requests from `http://localhost:4200`.
 
 ### 3. Start the Development Server
 
