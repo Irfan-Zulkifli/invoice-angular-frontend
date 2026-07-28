@@ -37,6 +37,7 @@ export class InvoiceList implements OnInit {
     this.getAllInvoices();
   }
 
+  // run the http get request and assign it to paginated signal
   getAllInvoices(page: number = 1) {
     this.invoiceService.getInvoices(page).subscribe({
       next: (res: PaginatedResponse<Invoice>) => {
@@ -49,10 +50,12 @@ export class InvoiceList implements OnInit {
     })
   }
 
+  // navigate to the view invoice page
   viewInvoice(id: number=0) {
     this.router.navigate(['/view-invoice', id]);
   }
 
+  // paginate change page
   changePage(url: string | null) {
     if (!url) return;
 
@@ -63,9 +66,9 @@ export class InvoiceList implements OnInit {
     }
   }
 
+  // run the http delete request
   deleteInvoice(id: number = 0) {
 
-    
     let isConfirm: boolean = confirm('Are you sure to delete this invoice?');
 
     if (isConfirm) {

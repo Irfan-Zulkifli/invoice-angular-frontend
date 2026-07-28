@@ -20,6 +20,8 @@ export class UpdateInvoice implements OnInit {
   submitted: boolean = false;
   id!: number;
 
+  // initialise form right after the creation of componenet
+  // populate the invoiceForm by run the HTTP get request
   ngOnInit(): void {
     this.initForm();
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -45,6 +47,7 @@ export class UpdateInvoice implements OnInit {
     ]);
   }
 
+  // initalise formgroup
   initForm() {
     this.invoiceForm = this.fb.group({
       customer_name: ['', Validators.required],
@@ -55,10 +58,12 @@ export class UpdateInvoice implements OnInit {
     });
   }
 
+  // get invoice items as form array
   get invoiceItems(): FormArray {
     return this.invoiceForm.get('invoice_items') as FormArray;
   }
 
+  // create item row of form group
   createItem() {
     return this.fb.group({
       product_name: ['', Validators.required],
@@ -67,14 +72,17 @@ export class UpdateInvoice implements OnInit {
     })
   }
 
+  // add item row
   addItem() {
     this.invoiceItems.push(this.createItem());
   }
 
+  // remove item row
   removeItem(index: number) {
     this.invoiceItems.removeAt(index);
   }
 
+  // submit form
   submitForm() {
     this.submitted = true;
 

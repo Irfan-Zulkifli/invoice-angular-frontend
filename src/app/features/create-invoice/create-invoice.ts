@@ -29,6 +29,7 @@ export class CreateInvoice implements OnInit {
     this.initForm();
   }
 
+  // initialise form
   initForm() {
     this.invoiceForm = this.fb.group({
       customer_name: ['', Validators.required],
@@ -39,10 +40,12 @@ export class CreateInvoice implements OnInit {
     });
   }
 
+  // get the invoice items from the form group invoice form
   get invoiceItems(): FormArray {
     return this.invoiceForm.get('invoice_items') as FormArray;
   }
 
+  // create new item row
   createItem(): FormGroup {
     return this.fb.group({
       product_name: ['', Validators.required],
@@ -51,14 +54,17 @@ export class CreateInvoice implements OnInit {
     });
   }
 
+  // add new item row
   addItem() {
     this.invoiceItems.push(this.createItem());
   }
 
+  // remvoe item row
   removeItem(index: number) {
     this.invoiceItems.removeAt(index);
   }
 
+  // submit form
   submitForm() {
     this.submitted = true;
 

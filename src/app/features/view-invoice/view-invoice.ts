@@ -18,10 +18,10 @@ export class ViewInvoice implements OnInit {
   invoice = signal<Invoice | null>(null);
 
   ngOnInit(): void {
-    // 1. Get the ID from the URL
+    // Get the ID from the URL
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    // 2. Call the service directly inside ngOnInit
+    // Call the service directly inside ngOnInit
     this.invoiceService.view(id).subscribe({
       next: (response) => {
         console.log(response.data.invoice_items);
