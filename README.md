@@ -2,7 +2,7 @@
 
 A Angular-based frontend application designed to work with a Laravel backend API for invoice management and data processing.
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed on your local machine:
 
